@@ -22,8 +22,8 @@ const Menu = () => {
         onClick={() => setOpen((prev) => !prev)}
       />
       {open && (
-        <div onClick={() => setOpen((p) => false)} className="absolute bg-blackk text-white left-0 top-20 w-full h-[calc(100vh-80px)] flex flex-col items-center justify-center gap-8 text-xl  z-10">
-          <RetroGrid className="w-full h-full" />
+        <div onClick={() => setOpen((p) => false)} className="absolute bg-blackk bg-opacity-90 backdrop-blur-sm  text-white left-0 top-20 w-full h-[calc(100vh-80px)] flex flex-col items-center justify-center gap-8 text-xl  z-10">
+          <RetroGrid className="w-full h-full font-bold" />
           <Link className="animate-underline"  href="/">Homepage</Link>
           <Link className="animate-underline"  href="/list">Shop</Link>
           <Link className="animate-underline"  href="/">Deals</Link>
