@@ -33,3 +33,11 @@
 .bg-custom-gradient {
     background: linear-gradient(90deg, #F0E2D1 0%, #e1b07c 50%, #F0E2D1 100%);
 }
+
+.scrollbar-hide::-webkit-scrollbar {
+    display:none;
+}
+
+.scrollbar-hide{
+    scrollbar-width: none;
+}
