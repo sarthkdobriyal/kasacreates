@@ -1,8 +1,16 @@
 import CategoryList from "@/components/CategoryList"
 import ProductList from "@/components/ProductList"
 import Slider from "@/components/Slider"
+import { WixClientContext } from "@/context/wixContext"
+import { wixClientServer } from "@/lib/wixClientServer"
+import { useContext, useEffect } from "react"
 
-const HomePage = () => {
+const HomePage = async () => {
+
+
+  const wixClient = await wixClientServer();
+
+
   return (
     <div className=''>
         <Slider />

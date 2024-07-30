@@ -9,8 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@wix/bookings": "^1.0.428",
+    "@wix/ecom": "^1.0.677",
+    "@wix/members": "^1.0.90",
+    "@wix/sdk": "^1.12.8",
+    "@wix/stores": "^1.0.168",
     "clsx": "^2.1.1",
     "framer-motion": "^11.3.19",
+    "js-cookie": "^3.0.5",
     "next": "14.2.2",
     "react": "^18",
     "react-dom": "^18",
