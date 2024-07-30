@@ -47,6 +47,8 @@ if (searchParams?.sort) {
 
 const res = await productQuery.find();
 
+// console.log(res.items)
+
 
   return (
     <div className="flex gap-x-8 gap-y-8 flex-wrap justify-around mt-12">
@@ -59,21 +61,21 @@ const res = await productQuery.find();
           >
             <div className="relative w-full h-80  ">
               <Image
-                src={product.media?.mainMedia?.image?.url || ''}
+                src={product.media?.mainMedia?.image?.url || '/product.png'}
                 alt={product.media?.mainMedia?.image?.altText || ''}
                 fill
                 sizes="25vw"
                 className="absolute object-cover rounded-md z-10 hover:opacity-0 transition-opacity easy duration-500"
               />
-              {product.media?.items && (
+              { product?.media.items.length > 1 ? (
                 <Image
-                  src={product?.media?.items[1].image?.url || ''}
-                  alt={product?.media?.items[1].image?.altText || ''}
+                  src={product?.media?.items[1].image?.url || ""}
+                  alt={product?.media?.items[1].image?.altText || 'product'}
                   fill
                   //  sizes='25vw'
                   className="absolute object-cover rounded-md"
                 />
-              )}
+              ): null}
             </div>
 
             <div className="flex justify-between">
