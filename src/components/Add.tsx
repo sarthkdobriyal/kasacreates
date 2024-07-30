@@ -1,12 +1,16 @@
 "use client"
 import { FC, useState } from "react";
 
-interface AddProps {}
+interface AddProps {
+  productId: string;
+  variantId: string;
+  stockNumber: number;
+}
 
-const Add: FC<AddProps> = ({}) => {
+const Add: FC<AddProps> = ({productId, variantId, stockNumber}) => {
 
   const [quantity, setquantity] = useState(1)
-  const stockNumber = 10
+  // const stockNumber = 10
 
   const handleQuantity = (type: "i" | "d" ) => {
     if(type === 'i' && quantity < stockNumber) {
@@ -41,11 +45,11 @@ const Add: FC<AddProps> = ({}) => {
             </button>
 
           </div>
-          <div className="text-xs">
+          { stockNumber> 0 && <div className="text-xs">
               Only <span className="text-orange-500">{stockNumber} items</span>{" "}
               left!
               <br /> {"Don't"} miss it
-            </div>
+            </div>}
         </div>
         
         
