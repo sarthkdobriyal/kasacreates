@@ -2,15 +2,15 @@ import Add from "@/components/Add"
 import CustomizeProducts from "@/components/CustomizeProducts"
 import ProductImages from "@/components/ProductImages"
 import { wixClientServer } from "@/lib/wixClientServer";
+import { products } from '@wix/stores';
 
 const SinglePage = async ({params}: { slug: string }) => {
     const wixClient = await wixClientServer();
 
     const res = await wixClient.products.queryProducts().eq("slug", params.slug).find()
-    // console.log(res.items[0].media?.items)
     const product = res.items[0]
     if(!product) return notFound()
-
+      console.log(product.productOptions)
 
 
 
@@ -39,7 +39,9 @@ const SinglePage = async ({params}: { slug: string }) => {
         )}
         <div className="h-[2px] bg-gray-100"></div>
 
-        <CustomizeProducts />
+        {
+          product.productOptions && product.variants &&
+          <CustomizeProducts productId={product._id} variants={product.variants} productOptions={product.productOptions} />}
         <Add />
         <div className="h-[2px] bg-gray-100"></div>
         {product.additionalInfoSections?.map((section: any) => (
