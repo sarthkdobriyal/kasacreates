@@ -3,8 +3,13 @@ import CustomizeProducts from "@/components/CustomizeProducts";
 import ProductImages from "@/components/ProductImages";
 import { wixClientServer } from "@/lib/wixClientServer";
 import { products } from "@wix/stores";
+import { notFound } from "next/navigation";
 
-const SinglePage = async ({ params }: { slug: string }) => {
+type ParamsType = {
+  slug: string
+}
+
+const SinglePage = async ({ params} : any ) => {
   const wixClient = await wixClientServer();
 
   const res = await wixClient.products

@@ -58,7 +58,7 @@ const CustomizeProducts: FC<CustomizeProductsProps> = ({
           <div className="flex flex-col gap-4" key={opt.name}>
             <h4 className="font-medium">Choose a {opt.name}</h4>
             <ul className="flex  items-center gap-3">
-              {opt.choices.map((choice) => {
+              {opt?.choices?.map((choice) => {
                 const disabled = !isVariantInStock({
                   ...selectedOptions,
                   [opt.name!]: choice.description!,

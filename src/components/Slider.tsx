@@ -118,7 +118,7 @@ const TextContainer = ({
   );
 };
 
-const ImageContainer = ({ url }: string) => {
+const ImageContainer = ({ url }: { url: string; }) => {
   return (
     <div className="h-1/2 xl:w-1/2 xl:h-full relative">
       <Image src={url} alt="" fill sizes="100%" className="object-cover" />

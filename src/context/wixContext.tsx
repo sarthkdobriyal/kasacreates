@@ -4,7 +4,7 @@ import { createClient, OAuthStrategy } from "@wix/sdk";
 import { availabilityCalendar, services } from "@wix/bookings";
 import { products, collections } from "@wix/stores";
 import Cookies from "js-cookie"
-import { createContext } from "react";
+import { createContext, ReactNode } from "react";
 
 const refreshToken = JSON.parse(Cookies.get("refreshToken") || "{}");
 
@@ -16,7 +16,7 @@ const myWixClient = createClient({
       services
     },
     auth: OAuthStrategy({
-      clientId: process.env.NEXT_PUBLIC_WIX_CLIENT_ID,
+      clientId: process.env.NEXT_PUBLIC_WIX_CLIENT_ID as string,
       tokens: {
         accessToken: {
           value: '',

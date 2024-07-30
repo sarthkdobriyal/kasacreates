@@ -59,16 +59,16 @@ const res = await productQuery.find();
           >
             <div className="relative w-full h-80  ">
               <Image
-                src={product.media?.mainMedia?.image?.url}
-                alt={product.media?.mainMedia?.image?.altText}
+                src={product.media?.mainMedia?.image?.url || ''}
+                alt={product.media?.mainMedia?.image?.altText || ''}
                 fill
                 sizes="25vw"
                 className="absolute object-cover rounded-md z-10 hover:opacity-0 transition-opacity easy duration-500"
               />
-              {product.media?.items[1] && (
+              {product.media?.items && (
                 <Image
-                  src={product?.media?.items[1].image?.url}
-                  alt={product?.media?.items[1].image?.altText}
+                  src={product?.media?.items[1].image?.url || ''}
+                  alt={product?.media?.items[1].image?.altText || ''}
                   fill
                   //  sizes='25vw'
                   className="absolute object-cover rounded-md"

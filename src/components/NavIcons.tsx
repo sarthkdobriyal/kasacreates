@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { FC, useState } from 'react'
 import CartModal from './CartModal';
+import Link from 'next/link';
 
 interface NavIconsProps {
   
@@ -66,7 +67,7 @@ const NavIcons: FC<NavIconsProps> = ({}) => {
 
 
 
-
+    const handleLogout = () => {}
 
 
   return <div className="flex items-center gap-4 xl:gap-6 relative">
