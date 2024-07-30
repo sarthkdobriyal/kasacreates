@@ -8,17 +8,44 @@ import { FC } from "react";
 interface ProductListProps {
   categoryId: string;
   limit?: number;
+  searchParams?: any;
 }
 
 const PRODUCT_PER_PAGE = 20;
 
-const ProductList: FC<ProductListProps> = async ({ categoryId, limit }) => {
+const ProductList: FC<ProductListProps> = async ({ categoryId, limit, searchParams }) => {
   const wixClient = await wixClientServer();
-  const res = await wixClient.products
-    .queryProducts()
-    .eq("collectionIds", categoryId)
-    .limit(limit || PRODUCT_PER_PAGE)
-    .find();
+  const productQuery = wixClient.products
+  .queryProducts()
+  .startsWith("name", searchParams?.name || "")
+  .eq("collectionIds", categoryId)
+  .hasSome(
+    "productType",
+    searchParams?.type ? [searchParams.type] : ["physical", "digital"]
+  )
+  .gt("priceData.price", searchParams?.min || 0)
+  .lt("priceData.price", searchParams?.max || 999999)
+  .limit(limit || PRODUCT_PER_PAGE)
+  .skip(
+    searchParams?.page
+      ? parseInt(searchParams.page) * (limit || PRODUCT_PER_PAGE)
+      : 0
+  );
+// .find();
+
+if (searchParams?.sort) {
+  const [sortType, sortBy] = searchParams.sort.split(" ");
+
+  if (sortType === "asc") {
+    productQuery.ascending(sortBy);
+  }
+  if (sortType === "desc") {
+    productQuery.descending(sortBy);
+  }
+}
+
+const res = await productQuery.find();
+console.log(res.items)
 
   return (
     <div className="flex gap-x-8 gap-y-8 flex-wrap justify-around mt-12">
