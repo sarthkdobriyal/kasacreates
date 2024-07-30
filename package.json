@@ -16,6 +16,7 @@
     "@wix/stores": "^1.0.168",
     "clsx": "^2.1.1",
     "framer-motion": "^11.3.19",
+    "isomorphic-dompurify": "^2.14.0",
     "js-cookie": "^3.0.5",
     "next": "14.2.2",
     "react": "^18",
