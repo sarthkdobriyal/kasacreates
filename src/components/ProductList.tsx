@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import DOMPurify from "isomorphic-dompurify";
 import { FC } from "react";
+import Pagination from "./Pagination";
 
 interface ProductListProps {
   categoryId: string;
@@ -11,7 +12,7 @@ interface ProductListProps {
   searchParams?: any;
 }
 
-const PRODUCT_PER_PAGE = 20;
+const PRODUCT_PER_PAGE = 10;
 
 const ProductList: FC<ProductListProps> = async ({ categoryId, limit, searchParams }) => {
   const wixClient = await wixClientServer();
@@ -45,7 +46,7 @@ if (searchParams?.sort) {
 }
 
 const res = await productQuery.find();
-console.log(res.items)
+
 
   return (
     <div className="flex gap-x-8 gap-y-8 flex-wrap justify-around mt-12">
@@ -99,6 +100,14 @@ console.log(res.items)
           </Link>
         );
       })}
+      
+      {/* { searchParams?.cat || searchParams?.name ? ( */}
+        <Pagination
+          currentPage={res.currentPage || 0}
+          hasPrev={res.hasPrev()}
+          hasNext={res.hasNext()}
+        />
+       {/* ) : null} */}
     </div>
   );
 };
