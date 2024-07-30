@@ -32,12 +32,12 @@ const Filter: FC<FilterProps> = ({catNames}) => {
           name="cat"
           className="py-2 px-4 rounded-md text-xs font-medium bg-[#EBEDED]"
           onChange={handleFilterChange}
-          
+          value={searchParams.get("cat") || ""}
         >
           {
             
               catNames?.map((cat) => {
-                return <option selected={searchParams.get("cat") === cat.slug || false}  key={cat._id as string} value={cat.slug as string}>{cat.name}</option>
+                return <option   key={cat._id as string} value={cat.slug as string}>{cat.name}</option>
               })
             
           }

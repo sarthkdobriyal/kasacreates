@@ -65,11 +65,11 @@ const res = await productQuery.find();
                 alt={product.media?.mainMedia?.image?.altText || ''}
                 fill
                 sizes="25vw"
-                className="absolute object-cover rounded-md z-10 hover:opacity-0 transition-opacity easy duration-500"
+                className="absolute object-cover rounded-md z-10 hover:opacity-0 transition-opacity ease duration-500"
               />
-              { product?.media.items.length > 1 ? (
+              { Array.isArray(product?.media?.items) && product.media.items.length > 1 ? (
                 <Image
-                  src={product?.media?.items[1].image?.url || ""}
+                  src={product?.media?.items[1].image?.url || "/product.png"}
                   alt={product?.media?.items[1].image?.altText || 'product'}
                   fill
                   //  sizes='25vw'
