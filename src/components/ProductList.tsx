@@ -21,7 +21,7 @@ const ProductList: FC<ProductListProps> = async ({ categoryId, limit }) => {
     .find();
 
   return (
-    <div className="flex gap-x-8 gap-y-8 flex-wrap  mt-12">
+    <div className="flex gap-x-8 gap-y-8 flex-wrap justify-around mt-12">
       {res.items.map((product: products.Product) => {
         return (
           <Link
