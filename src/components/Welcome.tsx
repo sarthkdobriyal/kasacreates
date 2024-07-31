@@ -45,7 +45,6 @@ const Welcome: FC<WelcomeProps> = ({}) => {
 
       const getMember = async () => {
         const member = await wixClient.members.getCurrentMember('')
-        console.log(member)
         return member
       }
 

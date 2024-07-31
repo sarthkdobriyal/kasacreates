@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useWixClient } from '@/hooks/useWixClient';
 import { members } from '@wix/members';
 import Cookies from 'js-cookie'
+import { useCartStore } from '@/hooks/useCartStore';
 
 interface NavIconsProps {
   
@@ -23,6 +24,12 @@ const NavIcons: FC<NavIconsProps> = ({}) => {
   
     const wixClient = useWixClient();
     let isLoggedIn = wixClient.auth.loggedIn();
+
+    const {cart , counter ,getCart} = useCartStore()
+
+    useEffect(() => {
+      getCart(wixClient)
+    }, [wixClient,getCart ])
   
   
     const handleProfile = () => {
@@ -33,7 +40,6 @@ const NavIcons: FC<NavIconsProps> = ({}) => {
         setIsProfileOpen((prev) => !prev);
       }
     };
-    console.log(isLoggedIn, "isLoggedIn")
   
   
     const login = async () => {
@@ -58,11 +64,7 @@ const NavIcons: FC<NavIconsProps> = ({}) => {
     };
   
   
-    // const { cart, counter, getCart } = useCartStore();
   
-    // useEffect(() => {
-    //   getCart(wixClient);
-    // }, [wixClient, getCart]);
 
 
 
@@ -100,8 +102,7 @@ const NavIcons: FC<NavIconsProps> = ({}) => {
   >
     <Image src="/cart.png" alt="" width={22} height={22} />
     <div className="absolute -top-4 -right-4 w-6 h-6 bg-lama rounded-full text-white text-sm flex items-center justify-center">
-      {/* {counter} */}
-      2
+      {counter}
     </div>
   </div>
   {isCartOpen && <CartModal />}
