@@ -3,16 +3,20 @@ import { updateUser } from "@/lib/actions";
 import { wixClientServer } from "@/lib/wixClientServer";
 import { members } from "@wix/members";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { format } from "timeago.js";
 
 const ProfilePage = async () => {
   const wixClient = await wixClientServer();
 
+  let isLoggedIn = wixClient.auth.loggedIn();
+  if(!isLoggedIn) redirect('/')
+
   const user = await wixClient.members.getCurrentMember({
     fieldsets: [members.Set.FULL],
   });
 
-  if (!user.member?.contactId) {
+  if ( !isLoggedIn && !user.member?.contactId) {
     return <div className="">Not logged in!</div>;
   }
   console.log(user)
