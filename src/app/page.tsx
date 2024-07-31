@@ -7,9 +7,6 @@ import { wixClientServer } from "@/lib/wixClientServer"
 import { Suspense, useContext, useEffect } from "react"
 
 const HomePage = async () => {
-
-
-
   return (
     <div className=''>
         <Slider />

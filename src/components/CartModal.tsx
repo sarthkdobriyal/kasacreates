@@ -1,6 +1,8 @@
 import { FC, useState } from "react";
 import { ClassValue } from "clsx";
 import Image from "next/image";
+import { WixClient } from '../context/wixContext';
+import { useWixClient } from "@/hooks/useWixClient";
 
 interface CartModalProps {}
 
@@ -8,6 +10,10 @@ const CartModal: FC<CartModalProps> = ({}) => {
   const cartItems = true;
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const wixClient = useWixClient();
+
+  
 
   return (
     <div className="w-max absolute p-4 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] bg-white top-12 right-0 flex flex-col gap-6 z-20">

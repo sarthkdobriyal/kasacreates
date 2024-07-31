@@ -37,7 +37,7 @@ const Filter: FC<FilterProps> = ({catNames}) => {
           {
             
               catNames?.map((cat) => {
-                return <option   key={cat._id as string} value={cat.slug as string}>{cat.name}</option>
+                return <option  key={cat._id as string} value={cat.slug as string}>{cat.name}</option>
               })
             
           }

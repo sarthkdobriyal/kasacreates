@@ -29,7 +29,7 @@ const Menu = () => {
           <Link className="animate-underline"  href="/">Deals</Link>
           <Link className="animate-underline"  href="/">About</Link>
           <Link className="animate-underline"  href="/">Contact</Link>
-          <Link className="animate-underline"  href="/">Logout</Link>
+          <Link className="animate-underline"  href="/">Login</Link>
           <Link className="animate-underline"  href="/">Cart(1)</Link>
         </div>
       )}
