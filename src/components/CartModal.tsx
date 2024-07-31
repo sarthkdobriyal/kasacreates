@@ -7,6 +7,7 @@ import { WixClient } from '../context/wixContext';
 import { useWixClient } from "@/hooks/useWixClient";
 import { useCartStore } from "@/hooks/useCartStore";
 import { media as wixMedia } from "@wix/sdk";
+import { currentCart } from "@wix/ecom";
 
 interface CartModalProps {}
 
@@ -17,15 +18,35 @@ const CartModal: FC<CartModalProps> = ({}) => {
 
   const {cart, isLoading, removeItem} = useCartStore()
 
+  const handleCheckout = async () => {
+    try {
+      const checkout =
+        await wixClient.currentCart.createCheckoutFromCurrentCart({
+          channelType: currentCart.ChannelType.WEB,
+        });
+
+      const { redirectSession } =
+        await wixClient.redirects.createRedirectSession({
+          ecomCheckout: { checkoutId: checkout.checkoutId },
+          callbacks: {
+            postFlowUrl: window.location.origin,
+            thankYouPageUrl: `${window.location.origin}/success`,
+          },
+        });
+
+      if (redirectSession?.fullUrl) {
+        window.location.href = redirectSession.fullUrl;
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   
 
   return (
     <div className="w-max absolute p-4 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] bg-white top-12 right-0 flex flex-col gap-6 z-20">
       {
-      isLoading ? (
-        "Loading..."
-      ):
       !cart.lineItems ? (
         <div>
           <h2 className="text-xl">Cart is Empty</h2>
@@ -42,7 +63,7 @@ const CartModal: FC<CartModalProps> = ({}) => {
             cart.lineItems.map((item) => {
               return <div
               key={item._id}
-              className="flex gap-4 mt-2">
+              className="flex gap-4  mt-2">
               <Image
                 src={wixMedia.getScaledToFillImageUrl(item.image,72,96,{})}
                 alt=""
@@ -50,16 +71,19 @@ const CartModal: FC<CartModalProps> = ({}) => {
                 width={72}
                 className="object-cover rounded-md"
               />
-              <div className="flex flex-col justify-between">
-                <div className="flex flex-col justify-between w-full">
-                  <div className="">
+              <div className="flex flex-col justify-between w-full">
+                <div className="flex flex-col justify-between ">
+                  
                     {/* TITLE */}
-                    <div className="flex items-center justify-between gap-8">
+                    <div className="flex items  justify-between gap-8">
                       <h3 className="font-semibold">{item.productName?.original}</h3>
                       <div className="p-1 bg-gray-50 rounded-sm flex items-center gap-2">
+                        
                         {item.quantity && item.quantity > 1 && (
-                        <div className="text-xs text-green-500">{item.quantity}</div>
-                        )} 
+                          <div className="text-xs text-green-500">
+                            {item.quantity} x{" "}
+                          </div>
+                        )}
                         {/* ${item.price?.amount} */}
                         {item.price?.formattedAmount}
                       </div>
@@ -68,7 +92,7 @@ const CartModal: FC<CartModalProps> = ({}) => {
                     <div className="text-sm text-gray-500">
                       {item.availability?.status}
                     </div>
-                  </div>
+                  
                 </div>
 
                 {/* Bottom */}
@@ -107,7 +131,7 @@ const CartModal: FC<CartModalProps> = ({}) => {
               <button
                 className="rounded-md py-3 px-4 bg-black text-white disabled:cursor-not-allowed disabled:opacity-75"
                 disabled={isLoading}
-                // onClick={handleCheckout}
+                onClick={handleCheckout}
               >
                 Checkout
               </button>
