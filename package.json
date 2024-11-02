@@ -13,7 +13,7 @@
     "@wix/ecom": "^1.0.677",
     "@wix/members": "^1.0.90",
     "@wix/sdk": "^1.12.8",
-    "@wix/stores": "^1.0.168",
+    "@wix/stores": "^1.0.269",
     "clsx": "^2.1.1",
     "framer-motion": "^11.3.19",
     "isomorphic-dompurify": "^2.14.0",
